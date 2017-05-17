@@ -2,11 +2,15 @@ package br.com.impacta.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
-public class Editora implements Crud{
+import br.com.impacta.sql.Sql;
+
+public class Editora implements Crud {
 	private long ideditora;
 	private String nome_editora;
+	private Map<String, String> params = new HashMap<>();
 
 	public long getIdeditora() {
 		return ideditora;
@@ -26,27 +30,42 @@ public class Editora implements Crud{
 
 	@Override
 	public void insert() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		
+		params.clear();
+		params.put("NOME", this.getNome_editora());
+		ResultSet rs = new Sql().select("CALL `sp_editora_insert`( :NOME )", this.params);
+
+		this.setData(rs);
+
 	}
 
 	@Override
 	public void delete() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		
+		params.clear();
+		params.put("ID", Long.toString(this.getIdeditora()));
+		new Sql().query("DELETE FROM tb_editoras where ideditora = :ID", params);
+		this.setIdeditora(0);
+		this.setNome_editora(null);
 	}
 
 	@Override
 	public void loadById() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		
+		params.clear();
+		params.put("ID", Long.toString(getIdeditora()));
+		this.setData(new Sql().select("SELECT * FROM tb_editoras where ideditora = :ID", params));
+
 	}
 
 	@Override
 	public void setData(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		while (rs.next()) {
+			this.setNome_editora(rs.getString("nome_editora"));
+			this.setIdeditora(rs.getLong("ideditora"));
+		}
+
 	}
 
-	
+	public static ResultSet getList() throws ClassNotFoundException, SQLException {
+		return new Sql().select("SELECT * FROM tb_editoras ORDER BY nome_editora", null);
+	}
+
 }

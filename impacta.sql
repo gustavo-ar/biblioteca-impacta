@@ -226,6 +226,49 @@ WHERE `idautor` = LAST_INSERT_ID() ;
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `sp_editora_insert` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_editora_insert` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editora_insert`(pnome_editora VARCHAR (64))
+BEGIN
+  INSERT INTO tb_editoras (`nome_editora`) 
+  VALUES
+	(pnome_editora) ; 
+			 
+SELECT 
+  * 
+FROM
+  `tb_editoras` 
+WHERE `ideditora` = LAST_INSERT_ID() ;
+  
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `sp_assunto_insert` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_assunto_insert` */;
+
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_assunto_insert`(pnome_assunto VARCHAR (64))
+BEGIN
+  INSERT INTO tb_assuntos (`nome_assunto`) 
+  VALUES
+	(pnome_assunto) ; 
+			 
+SELECT 
+  * 
+FROM
+  `tb_assuntos` 
+WHERE `idassunto` = LAST_INSERT_ID() ;
+  
+END */$$
+DELIMITER ;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

@@ -3,19 +3,21 @@ package br.com.impacta.teste;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.impacta.model.Autor;
+import br.com.impacta.model.Editora;
 
 public class Testes {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		
-		Autor autor = new Autor();
+		Editora Editora = new Editora();
 		
-		autor.setNome_autor("João");
+		//Editora.setNome_editora("TEste");
 		
-		autor.insert();
+		Editora.setIdeditora(7);
+		
+		Editora.delete();
 
-		ResultSet rs = Autor.getList();
+		ResultSet rs = br.com.impacta.model.Editora.getList();
 		
 		while(rs.next()){
 			System.out.println(rs.getString(1));

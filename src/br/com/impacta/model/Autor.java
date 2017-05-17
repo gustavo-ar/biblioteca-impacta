@@ -12,7 +12,7 @@ public class Autor implements Crud {
 	private long idautor;
 	private String nome_autor;
 	private ArrayList<Obra> obras = new ArrayList<>();
-	private Map<String, String> params = new HashMap<>();;
+	private Map<String, String> params = new HashMap<>();
 
 	public void addObra(Obra obra) {
 		this.obras.add(obra);
