@@ -3,25 +3,27 @@ package br.com.impacta.teste;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.impacta.model.Editora;
+import br.com.impacta.model.Assunto;
 
 public class Testes {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		
-		Editora Editora = new Editora();
+		Assunto Assunto = new Assunto();
 		
-		//Editora.setNome_editora("TEste");
+		//Assunto.setNome_assunto("TEste");
 		
-		Editora.setIdeditora(7);
+		Assunto.setIdassunto(7);
 		
-		Editora.delete();
+		//Assunto.insert();
+		
+		Assunto.delete();
 
-		ResultSet rs = br.com.impacta.model.Editora.getList();
+		ResultSet rs = br.com.impacta.model.Assunto.getList();
 		
 		while(rs.next()){
 			System.out.println(rs.getString(1));
-			System.out.println(rs.getString(2));
+			//System.out.println(rs.getString(2));
 		}
 
 	}

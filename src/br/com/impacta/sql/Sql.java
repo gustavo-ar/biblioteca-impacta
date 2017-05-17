@@ -33,7 +33,7 @@ public class Sql {
 		NamedParameterStatement stmt = new NamedParameterStatement(conn, rawQuery);
 		this.setParams(stmt, params);
 		stmt.execute();
-
+		stmt.close();
 	}
 
 	public ResultSet select(String rawQuery, Map<String, String> params) throws SQLException {
