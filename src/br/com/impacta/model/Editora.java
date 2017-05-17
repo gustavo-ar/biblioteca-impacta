@@ -43,12 +43,6 @@ public class Editora implements Crud{
 	}
 
 	@Override
-	public void setData(Map<String, String> data) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setData(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		

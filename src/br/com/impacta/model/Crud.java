@@ -11,7 +11,5 @@ public interface Crud {
 
 	public void loadById() throws ClassNotFoundException, SQLException;
 
-	public void setData(Map<String, String> data);
-
 	public void setData(ResultSet rs) throws SQLException;
 }

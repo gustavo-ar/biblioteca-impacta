@@ -8,10 +8,17 @@ import br.com.impacta.model.Autor;
 public class Testes {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		
+		Autor autor = new Autor();
+		
+		autor.setNome_autor("João");
+		
+		autor.insert();
 
 		ResultSet rs = Autor.getList();
 		
 		while(rs.next()){
+			System.out.println(rs.getString(1));
 			System.out.println(rs.getString(2));
 		}
 

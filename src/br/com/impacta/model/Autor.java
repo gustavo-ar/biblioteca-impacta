@@ -78,4 +78,6 @@ public class Autor implements Crud {
 	public static ResultSet getList() throws ClassNotFoundException, SQLException {
 		return new Sql().select("SELECT * FROM tb_autores ORDER BY nome_autor", null);
 	}
+
+	
 }
