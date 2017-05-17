@@ -50,9 +50,11 @@ CREATE TABLE `tb_autores` (
   `idautor` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nome_autor` varchar(64) NOT NULL,
   PRIMARY KEY (`idautor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_autores` */
+
+insert  into `tb_autores`(`idautor`,`nome_autor`) values (1,'Leonardo Cardoso'),(2,'Teste');
 
 /*Table structure for table `tb_autores_obras` */
 
@@ -202,6 +204,27 @@ CREATE TABLE `tb_tipo_pessoa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_tipo_pessoa` */
+
+/* Procedure structure for procedure `sp_autor_insert` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_autor_insert` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_autor_insert`(pnome_autor VARCHAR (64))
+BEGIN
+  INSERT INTO tb_autores (`nome_autor`) 
+  VALUES
+    (pnome_autor) ; 
+             
+SELECT 
+  * 
+FROM
+  `tb_autores` 
+WHERE `idautor` = LAST_INSERT_ID() ;
+  
+END */$$
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
