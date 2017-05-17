@@ -8,10 +8,10 @@ import java.util.Map;
 
 import br.com.impacta.sql.Sql;
 
-public class Autor implements Crud{
+public class Autor implements Crud {
 	private long idautor;
 	private String nome_autor;
-	private ArrayList<Obra> obras = new ArrayList<>();	
+	private ArrayList<Obra> obras = new ArrayList<>();
 	private Map<String, String> params = new HashMap<>();;
 
 	public void addObra(Obra obra) {
@@ -43,12 +43,8 @@ public class Autor implements Crud{
 		params.clear();
 		params.put("NOME", this.getNome_autor());
 		ResultSet rs = new Sql().select("CALL `sp_autor_insert`( :NOME )", this.params);
-		
-		while(rs.next()){
-			this.setNome_autor(rs.getString("nome_autor"));
-			this.setIdautor(rs.getLong("idautor"));
-		}
-		
+
+		this.setData(rs);
 	}
 
 	@Override
@@ -65,20 +61,18 @@ public class Autor implements Crud{
 		params.clear();
 		params.put("ID", Long.toString(this.getIdautor()));
 		ResultSet rs = new Sql().select("SELECT * FROM tb_autores where idautor = :ID", params);
-		
-		while(rs.next()){
-			this.setNome_autor(rs.getString("nome_autor"));
-			this.setIdautor(rs.getLong("idautor"));
-		}
-		
+
+		this.setData(rs);
 	}
 
 	@Override
-	public void setData(Map<String, String> data) {
+	public void setData(ResultSet rs) throws SQLException {
 
-			this.setIdautor(Long.parseLong(data.get("idautor")));
-			this.setNome_autor(data.get("nome_autor"));
-		
+		while (rs.next()) {
+			this.setNome_autor(rs.getString("nome_autor"));
+			this.setIdautor(rs.getLong("idautor"));
+		}
+
 	}
 
 	public static ResultSet getList() throws ClassNotFoundException, SQLException {
