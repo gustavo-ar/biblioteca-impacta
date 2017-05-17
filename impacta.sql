@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS `tb_exemplares`;
 CREATE TABLE `tb_exemplares` (
   `num_exemplar` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idobra` int(10) unsigned NOT NULL,
-  `situacao_exemplar` tinyint(1) NOT NULL,
+  `emprestado` tinyint(1) NOT NULL,
   `data_aquisicao` date NOT NULL,
   PRIMARY KEY (`num_exemplar`),
   KEY `tb_exemplar_FKIndex1` (`idobra`)
@@ -202,23 +202,6 @@ CREATE TABLE `tb_tipo_pessoa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_tipo_pessoa` */
-
-/*Table structure for table `tb_usuarios` */
-
-DROP TABLE IF EXISTS `tb_usuarios`;
-
-CREATE TABLE `tb_usuarios` (
-  `idusuario` int(11) NOT NULL AUTO_INCREMENT,
-  `idpessoa` int(11) NOT NULL,
-  `login` varchar(64) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `inadmin` tinyint(1) NOT NULL,
-  `data_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idusuario`),
-  KEY `tb_users_FKIndex1` (`idpessoa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `tb_usuarios` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
