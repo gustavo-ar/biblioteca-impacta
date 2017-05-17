@@ -1,16 +1,20 @@
 package br.com.impacta.teste;
 
-import java.sql.Connection;
-
-import br.com.impacta.jdbc.ConnectionFactory;
+import br.com.impacta.model.Aluno;
+import br.com.impacta.model.Pessoa;
+import br.com.impacta.model.Professor;
 
 public class Testes {
 
 	public static void main(String[] args) {
-		Connection con = new ConnectionFactory().getConnection();
+		Pessoa aluno = new Aluno();
 		
-		System.out.println("ok");
-
+		Pessoa professor = new Professor();
+		
+		System.out.println(professor+"\n"+aluno);
+		
+		aluno.setCpf("30");
+		System.out.println(aluno.getCpf());
 	}
 
 }
