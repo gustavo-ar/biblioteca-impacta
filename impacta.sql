@@ -50,7 +50,7 @@ CREATE TABLE `tb_autores` (
   `idautor` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nome_autor` varchar(64) NOT NULL,
   PRIMARY KEY (`idautor`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_autores` */
 
@@ -149,7 +149,7 @@ CREATE TABLE `tb_obras` (
 DROP TABLE IF EXISTS `tb_pessoas`;
 
 CREATE TABLE `tb_pessoas` (
-  `idpessoa` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idpessoa` int(10) unsigned NOT NULL,
   `idtipo_pessoa` int(10) unsigned NOT NULL,
   `nome` varchar(64) NOT NULL,
   `email` varchar(128) NOT NULL,
@@ -163,6 +163,8 @@ CREATE TABLE `tb_pessoas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_pessoas` */
+
+insert  into `tb_pessoas`(`idpessoa`,`idtipo_pessoa`,`nome`,`email`,`senha`,`telefone`,`inadmin`,`cpf`,`data_registro`) values (1600559,3,'Leonardo Cardoso','leocardoso@impacta.com.br','1234','11951740678',1,'43043043092','2017-05-18 16:45:26');
 
 /*Table structure for table `tb_reservas` */
 
@@ -201,9 +203,32 @@ CREATE TABLE `tb_tipo_pessoa` (
   `idtipo_pessoa` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome_tipo` varchar(30) NOT NULL,
   PRIMARY KEY (`idtipo_pessoa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_tipo_pessoa` */
+
+insert  into `tb_tipo_pessoa`(`idtipo_pessoa`,`nome_tipo`) values (1,'Professor'),(2,'Aluno'),(3,'Funcionário');
+
+/* Procedure structure for procedure `sp_assunto_insert` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_assunto_insert` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_assunto_insert`(pnome_assunto VARCHAR (64))
+BEGIN
+  INSERT INTO tb_assuntos (`nome_assunto`) 
+  VALUES
+	(pnome_assunto) ; 
+			 
+SELECT 
+  * 
+FROM
+  `tb_assuntos` 
+WHERE `idassunto` = LAST_INSERT_ID() ;
+  
+END */$$
+DELIMITER ;
 
 /* Procedure structure for procedure `sp_autor_insert` */
 
@@ -243,58 +268,6 @@ SELECT
 FROM
   `tb_editoras` 
 WHERE `ideditora` = LAST_INSERT_ID() ;
-  
-END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `sp_assunto_insert` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `sp_assunto_insert` */;
-
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_assunto_insert`(pnome_assunto VARCHAR (64))
-BEGIN
-  INSERT INTO tb_assuntos (`nome_assunto`) 
-  VALUES
-	(pnome_assunto) ; 
-			 
-SELECT 
-  * 
-FROM
-  `tb_assuntos` 
-WHERE `idassunto` = LAST_INSERT_ID() ;
-  
-END */$$
-DELIMITER ;
-
-
-DELIMITER $$
-
-/* Procedure structure for procedure `sp_exemplar_insert` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `sp_exemplar_insert` */;
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_exemplar_insert`(
-pnum_exemplar int (10),
-pid_obra int(10),
-pemprestado tinyint(1),
-pdata_aquisicao date
-)
-BEGIN
-  INSERT INTO `impacta`.`tb_exemplares`
-(`num_exemplar`,
-`idobra`,
-`emprestado`,
-`data_aquisicao`)
-VALUES(pnum_exemplar,pid_obra,pemprestado,pdata_aquisicao);
-			 
-SELECT 
-  * 
-FROM
-  `tb_exemplares` 
-WHERE `idexemplar` = LAST_INSERT_ID() ;
   
 END */$$
 DELIMITER ;

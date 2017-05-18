@@ -6,10 +6,15 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Controller
-public class Hello extends WebMvcConfigurerAdapter {
-	@RequestMapping("hello")
-	public String form() {
+public class BibliotecaController extends WebMvcConfigurerAdapter {
+	@RequestMapping("admin")
+	public String homeAdmin() {
 		return "admin/index";
+	}
+	
+	@RequestMapping("admin/login")
+	public String loginAdmin() {
+		return "admin/login";
 	}
 
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
