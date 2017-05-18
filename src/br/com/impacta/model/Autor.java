@@ -38,16 +38,13 @@ public class Autor implements Crud {
 		this.nome_autor = nome_autor;
 	}
 
-	@Override
 	public void insert() throws ClassNotFoundException, SQLException {
 		params.clear();
 		params.put("NOME", this.getNome_autor());
 		ResultSet rs = new Sql().select("CALL `sp_autor_insert`( :NOME )", this.params);
-
 		this.setData(rs);
 	}
 
-	@Override
 	public void delete() throws ClassNotFoundException, SQLException {
 		params.clear();
 		params.put("ID", Long.toString(this.getIdautor()));
@@ -65,7 +62,10 @@ public class Autor implements Crud {
 		this.setData(rs);
 	}
 
-	@Override
+	/**
+	 *  Método utilizado para setar os atributos após alguma consulta
+	 * 
+	 */
 	public void setData(ResultSet rs) throws SQLException {
 
 		while (rs.next()) {
@@ -75,9 +75,13 @@ public class Autor implements Crud {
 
 	}
 
+	/**
+	 * @return Retorna um ResultSet com os autores
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public static ResultSet getList() throws ClassNotFoundException, SQLException {
 		return new Sql().select("SELECT * FROM tb_autores ORDER BY nome_autor", null);
 	}
 
-	
 }
