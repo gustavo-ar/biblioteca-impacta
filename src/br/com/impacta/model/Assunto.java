@@ -38,7 +38,7 @@ public class Assunto implements Crud {
 		this.nome_assunto = nome_assunto;
 	}
 
-	@Override
+	
 	public void insert() throws ClassNotFoundException, SQLException {
 		params.clear();
 		params.put("ID", Integer.toString(getIdassunto()));
@@ -46,7 +46,7 @@ public class Assunto implements Crud {
 		
 	}
 
-	@Override
+	
 	public void delete() throws ClassNotFoundException, SQLException {
 		this.params.clear();
 		params.put("ID", Integer.toString(getIdassunto()));
@@ -55,7 +55,7 @@ public class Assunto implements Crud {
 		this.setNome_assunto(null);
 	}
 
-	@Override
+	
 	public void loadById() throws ClassNotFoundException, SQLException {
 		this.params.clear();
 		params.put("ID", Integer.toString(getIdassunto()));
@@ -63,7 +63,7 @@ public class Assunto implements Crud {
 
 	}
 
-	@Override
+	
 	public void setData(ResultSet rs) throws SQLException {
 		while (rs.next()) {
 			this.setIdassunto(rs.getInt("idassunto"));

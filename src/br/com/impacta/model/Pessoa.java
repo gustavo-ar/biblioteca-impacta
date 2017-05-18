@@ -1,6 +1,9 @@
 package br.com.impacta.model;
 
-public class Pessoa {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Pessoa implements Crud{
 	private String nome;
 	private String email;
 	private String senha;
@@ -72,6 +75,30 @@ public class Pessoa {
 
 	public void setIdtipo_pessoa(int idtipo_pessoa) {
 		this.idtipo_pessoa = idtipo_pessoa;
+	}
+
+	@Override
+	public void insert() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loadById() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setData(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

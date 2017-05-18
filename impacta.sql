@@ -269,6 +269,36 @@ WHERE `idassunto` = LAST_INSERT_ID() ;
 END */$$
 DELIMITER ;
 
+
+DELIMITER $$
+
+/* Procedure structure for procedure `sp_exemplar_insert` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_exemplar_insert` */;
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_exemplar_insert`(
+pnum_exemplar int (10),
+pid_obra int(10),
+pemprestado tinyint(1),
+pdata_aquisicao date
+)
+BEGIN
+  INSERT INTO `impacta`.`tb_exemplares`
+(`num_exemplar`,
+`idobra`,
+`emprestado`,
+`data_aquisicao`)
+VALUES(pnum_exemplar,pid_obra,pemprestado,pdata_aquisicao);
+			 
+SELECT 
+  * 
+FROM
+  `tb_exemplares` 
+WHERE `idexemplar` = LAST_INSERT_ID() ;
+  
+END */$$
+DELIMITER ;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
