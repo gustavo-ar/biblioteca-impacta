@@ -2,6 +2,11 @@ package br.com.impacta.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import br.com.impacta.sql.Sql;
 
 public class Pessoa implements Crud{
 	private String nome;
@@ -10,8 +15,19 @@ public class Pessoa implements Crud{
 	private String telefone;
 	private boolean inadmin;
 	private String cpf;
+	public Calendar getData_registro() {
+		return data_registro;
+	}
+
+	public void setData_registro(Calendar data_registro) {
+		this.data_registro = data_registro;
+	}
+
 	private long idpessoa;
+	private Calendar data_registro;
 	private int idtipo_pessoa;
+	private Map<String, String> params = new HashMap<>();
+
 
 	public String getNome() {
 		return nome;
@@ -91,13 +107,28 @@ public class Pessoa implements Crud{
 
 	@Override
 	public void loadById() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
+		params.clear();
+		params.put("ID", Long.toString(this.getIdpessoa()));
+		ResultSet rs = new Sql().select("SELECT * FROM tb_pessoas where idpessoa = :ID", params);
+
+		this.setData(rs);
 		
 	}
 
 	@Override
 	public void setData(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
+		while (rs.next()) {
+			this.setIdtipo_pessoa(rs.getInt("idtipo_pessoa"));
+			this.setIdpessoa(rs.getLong("idpessoa"));
+			this.setNome(rs.getString("nome"));
+			this.setSenha(rs.getString("senha"));
+			this.setTelefone(rs.getString("telefone"));
+			this.setInadmin(rs.getBoolean("inadmin"));
+			this.setCpf(rs.getString("cpf"));
+			Calendar data = Calendar.getInstance();
+			data.setTime(rs.getDate("data_registro"));
+			this.setData_registro(data);;
+		}
 		
 	}
 

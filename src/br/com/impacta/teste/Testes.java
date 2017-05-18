@@ -1,32 +1,21 @@
 package br.com.impacta.teste;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.impacta.model.Assunto;
+import br.com.impacta.model.Funcionario;
+import br.com.impacta.model.Pessoa;
 
 public class Testes {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		
-		Assunto Assunto = new Assunto();
+		Pessoa leo = new Funcionario();
 		
+		leo.setIdpessoa(1600559);
 		
+		leo.loadById();
 		
-		//Assunto.setNome_assunto("TEste");
-		
-		Assunto.setIdassunto(7);
-		
-		//Assunto.insert();
-		
-		Assunto.delete();
-
-		ResultSet rs = br.com.impacta.model.Assunto.getList();
-		
-		while(rs.next()){
-			System.out.println(rs.getString(1));
-			//System.out.println(rs.getString(2));
-		}
+		System.out.println(leo.getNome());
 
 	}
 }
